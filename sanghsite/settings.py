@@ -27,9 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-# Media root
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 # Application definition
 
 INSTALLED_APPS = (
@@ -105,3 +102,18 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static'),]
+
+# Media root
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+# Login URL
+LOGIN_URL = 'login'
+
+# Email settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'rssgbtalukathane@gmail.com'
+EMAIL_HOST_PASSWORD = os.environ['MY_MAIL_PWD']
+EMAIL_PORT = 587
+DEFAULT_FROM_EMAIL = EMAIL_HOST_USER

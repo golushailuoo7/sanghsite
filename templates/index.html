@@ -1,8 +1,7 @@
 {% extends "base.html" %}
 
 {% block content %}
-	<form action="{% url 'login' %}" method="get">
-		<input type="hidden" name="next" value="{% url 'gbtaluka:profile' %}">
+	<form action="{% url 'login' %}">
 		<input type="submit" value="login">
 	</form>
 	<form action="{% url 'signup' %}">
