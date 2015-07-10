@@ -4,6 +4,8 @@ from gbtaluka.models import UserDetail
 from django.contrib.auth.models import User
 
 def index_view(request):
+    if request.user.is_authenticated():
+        return redirect('gbtaluka:profile')
     return render(request, 'index.html', {})
 
 def signup_view(request):
@@ -20,7 +22,7 @@ def signup_view(request):
                 user.set_password(form.cleaned_data['password'])
                 user_detail = UserDetail(user=user)
                 user_detail.save()
-                return redirect('gbtaluka:profile')
+                return redirect('login')
     else:
         form = SignupForm()
     return render(request, 'registration/signup.html', {'form': form})
