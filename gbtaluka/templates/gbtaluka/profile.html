@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+	<p>Hello, {{ cur_user.username }}!.</p>
+
+	<form action="{% url 'logout' %}" method="get">
+		<input type="hidden" name="next" value="{% url 'main_index' %}">
+		<input type="submit" value="logout">
+	</form>
+{% endblock %}

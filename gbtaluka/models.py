@@ -68,7 +68,7 @@ class Responsibility(models.Model):
         return self.responsibility
 
 
-class BasicDetail(models.Model):
+class UserDetail(models.Model):
 
     JOIN_RSS = 'JOINRSS'
     FRIENDS = 'FRIENDS'
@@ -98,25 +98,25 @@ class BasicDetail(models.Model):
     hobbies = models.CharField(max_length=300, null=True, blank=True)
     joining_date = models.DateField('date joined', null=True, blank=True)
     source_of_joining = models.CharField(max_length=10, choices=JOIN_SOURCE, null=True, blank=True)
-    prathmik_completed = models.BooleanField()
-    prathm_varsh_completed = models.BooleanField()
-    dwitiya_varsh_completed = models.BooleanField()
-    tratiya_varsh_completed = models.BooleanField()
-    shirt = models.BooleanField()
-    pants = models.BooleanField()
-    socks = models.BooleanField()
-    shoes = models.BooleanField()
-    cap = models.BooleanField()
-    belt = models.BooleanField()
-    bamboo_staff = models.BooleanField()
-    publish = models.BooleanField()
+    prathmik_completed = models.BooleanField(default=False)
+    prathm_varsh_completed = models.BooleanField(default=False)
+    dwitiya_varsh_completed = models.BooleanField(default=False)
+    tratiya_varsh_completed = models.BooleanField(default=False)
+    shirt = models.BooleanField(default=False)
+    pants = models.BooleanField(default=False)
+    socks = models.BooleanField(default=False)
+    shoes = models.BooleanField(default=False)
+    cap = models.BooleanField(default=False)
+    belt = models.BooleanField(default=False)
+    bamboo_staff = models.BooleanField(default=False)
+    publish = models.BooleanField(default=False)
 
     def __str__(self):
         return "{}@{}".format(self.user.first_name, self.user.username)
 
 
 class FamilyDetail(models.Model):
-    basic_detail = models.ForeignKey(BasicDetail)
+    basic_detail = models.ForeignKey(UserDetail)
     relative_name = models.CharField(max_length=200)
     relation = models.CharField(max_length=200)
     education = models.CharField(max_length=200)
