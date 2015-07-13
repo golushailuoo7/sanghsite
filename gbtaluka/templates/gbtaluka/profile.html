@@ -14,5 +14,27 @@
 
 
 {% block content %}
+
+
+
+<div class="col-md-3">
+  <a href="{{ detail.picture.url }}" class="thumbnail">
+    <img src="{{ detail.picture.url }}" alt="killer">
+  </a>
+  <h3>{{ detail.user.first_name }} {{ detail.user.last_name }}</h3>
+  <h3>{{ detail.shakha }}</h3>
+  <h3>{{ detail.responsibility }}</h3>
+</div>
+<div class="col-md-5">
+</div>
+<div class="col-sm-4 Notification_bar noticebar">
+	<h2>Notifications and Events</h2>
+	{% for notice in notice_bar %}
+		<h2><small>{{ notice.title }}:</small></h2>
+		<p>{{ notice.description }}</p>
+		<p><strong>from</strong> {{ notice.from_date }} <strong>to</strong> {{ notice.to_date }}</p>
+		
+	{% endfor %}
+</div>
 	
 {% endblock %}

@@ -11,7 +11,7 @@ cur_year = datetime.date.today().year
 class UpdateProfile(forms.ModelForm):
     class Meta:
         model = UserDetail
-        exclude = ['user', 'responsibility',]
+        exclude = ['user', 'responsibility', 'publish',]
 
         widgets = {
             'date_of_birth': SelectDateWidget(empty_label=("Choose Year", "Choose Month", "Choose Day"), years=range(1900, cur_year+1)),

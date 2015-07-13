@@ -15,7 +15,7 @@
 {% block content %}
 	
 	{{ form.non_field_errors }}
-	<form class="form-horizontal" action="{% url 'gbtaluka:update_profile' %}" method="post">
+	<form class="form-horizontal" action="{% url 'gbtaluka:update_profile' %}" method="post" enctype="multipart/form-data">
 	{% csrf_token %}
 		{% for field in form %}
 		<div class="form-group">
