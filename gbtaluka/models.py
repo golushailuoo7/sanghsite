@@ -87,7 +87,7 @@ class UserDetail(models.Model):
     user = models.OneToOneField(User)
     shakha = models.ForeignKey(Shakha, null=True, blank=True)
     responsibility = models.ForeignKey(Responsibility, null=True, blank=True)
-    gatnayak = models.ForeignKey(User, related_name='gatnayak', null=True, blank=True)
+    gatnayak = models.ForeignKey("UserDetail", related_name='gatnayak_fk', null=True, blank=True)
     picture = models.ImageField(upload_to=content_file_name, null=True, blank=True)
     date_of_birth = models.DateField('date of birth', null=True, blank=True)
     contact_number = models.CharField(max_length=10, null=True, blank=True)

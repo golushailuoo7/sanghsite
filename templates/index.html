@@ -1,11 +1,32 @@
 {% extends "base.html" %}
 
+{% block navbarright %}
+		<li><a href="{% url 'login' %}">Login</a></li>
+		<li><a href="{% url 'signup' %}">Signup</a></li>
+	
+{% endblock %}
+
 {% block content %}
-	<form action="{% url 'login' %}">
-		<input type="submit" value="login">
-	</form>
-	<form action="{% url 'signup' %}">
-		<input type="submit" value="sign up">
-	</form>
+	
+	<div class="col-sm-4 Notification_bar noticebar">
+		<h2>Notifications</h2>
+		{% for notice in notice_bar %}
+			<h2><small>{{ notice.title }}:</small></h2>
+			<p>{{ notice.description }}</p>
+			<p><strong>from</strong> {{ notice.from_date }} <strong>to</strong> {{ notice.to_date }}</p>
+			
+		{% endfor %}
+	</div>
+
+	<div class="col-sm-8">
+		<blockquote>
+  		<p>Happiness of Hindus is the happiness of my family and me. The problems faced by Hindu society are our problems and its humiliation is our humiliation. Such feeling of belonging should be in every Hindu. This is the basis of Hindu Dharma.</p>
+  		<footer><cite title="Source Title">Dr. Keshav Baliram Hedgewar</cite></footer>
+		</blockquote>
+		<blockquote>
+  		<p>If we keep Chhatrapati Shivaji Maharaj as our ideal, we will remember his heroics for the cause of defending Hindudom. The samarthya i.e. power of Shivaji is as much as that of the Saffron Flag. The history we remember looking at the saffron flag, and the motivation we get from it, the same is got from Shivaji Maharaj’s life. Shivaji lifted the saffron flag which was truly in the dust, re-established Hindu Pad-padshahi and rejuvenated the dying Hindutva. So, if you want to keep a man as ideal, then keep Shivaji as the one.</p>
+  		<footer><cite title="Source Title">Dr. Keshav Baliram Hedgewar</cite></footer>
+		</blockquote>
+	</div>
 
 {% endblock %}

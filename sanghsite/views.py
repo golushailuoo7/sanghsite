@@ -1,12 +1,14 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm
-from gbtaluka.models import UserDetail
+from gbtaluka.models import UserDetail, NoticeBoard
 from django.contrib.auth.models import User
+from django.utils import timezone
 
 def index_view(request):
     if request.user.is_authenticated():
         return redirect('gbtaluka:profile')
-    return render(request, 'index.html', {})
+    notice_bar = NoticeBoard.objects.filter(to_date__lte=timezone.now())
+    return render(request, 'index.html', {'notice_bar': notice_bar})
 
 def signup_view(request):
     if request.method == 'POST':

@@ -2,6 +2,7 @@
 
 {% block navbarright %}
 	<li><a href="{% url 'gbtaluka:profile' %}">{{ user.first_name }}</a></li>
+	<li><a href="{% url 'password_change' %}">change password</a></li>
 	<li>
 	<form class="navbar-form navbar-right" action="{% url 'logout' %}" method="get">
 		<input type="hidden" name="next" value="{% url 'main_index' %}">
@@ -12,8 +13,9 @@
 
 
 {% block content %}
-	<h2>Change your password</h2>
-	<form class="form-horizontal" action="{% url 'password_change' %}" method="post">
+	
+	{{ form.non_field_errors }}
+	<form class="form-horizontal" action="{% url 'gbtaluka:update_profile' %}" method="post">
 	{% csrf_token %}
 		{% for field in form %}
 		<div class="form-group">
@@ -30,8 +32,10 @@
 	  {% endfor %}
   	<div class="form-group">
 	    <div class="col-sm-offset-2 col-sm-10">
-	      <button type="submit" class="btn btn-default">change</button>
+	      <button type="submit" class="btn btn-default">update</button>
 	    </div>
   	</div>
 	</form>
+
 {% endblock %}
+
