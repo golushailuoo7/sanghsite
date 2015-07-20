@@ -5,7 +5,7 @@ from django.utils import timezone
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.contrib.auth.models import User
 
-from .forms import UpdateProfile, UserSearch, CreateShakha, EditResponsibility
+from .forms import UpdateProfile, UserSearch, CreateShakha, EditResponsibility, AddNotification
 from .models import Responsibility, NoticeBoard, Shakha, UserDetail
 
 
@@ -16,7 +16,7 @@ def only_taluka_level_user(user):
 @login_required
 def profile_view(request):
     user_detail = request.user.userdetail
-    notice_bar = NoticeBoard.objects.filter(to_date__lte=timezone.now())
+    notice_bar = NoticeBoard.objects.filter(to_date__gte=timezone.now())
     if request.method == 'POST':
         form = UserSearch(request.POST)
         if form.is_valid():
@@ -62,7 +62,7 @@ def update_profile_view(request):
 def user_view(request, username):
     this_user_detail = get_object_or_404(User, username=username).userdetail
     user_detail = request.user.userdetail
-    notice_bar = NoticeBoard.objects.filter(to_date__lte=timezone.now())
+    notice_bar = NoticeBoard.objects.filter(to_date__gte=timezone.now())
     return render(request,
         'gbtaluka/user.html',
         {'detail': user_detail, 'notice_bar': notice_bar, 'this_user_detail': this_user_detail})
@@ -125,3 +125,16 @@ def edit_responsibility_view(request, user_id):
     else:
         form = EditResponsibility(instance=user_detail)
     return render(request, 'gbtaluka/edit_responsibility.html', {'form': form, 'user_detail': user_detail})
+
+
+@user_passes_test(only_taluka_level_user)
+@login_required
+def add_notification_view(request):
+    if request.method == 'POST':
+        form = AddNotification(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('gbtaluka:profile')
+    else:
+        form = AddNotification()
+    return render(request, 'gbtaluka/add_notification.html', {'form': form})

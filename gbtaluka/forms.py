@@ -4,7 +4,7 @@ from django import forms
 from django.forms.extras.widgets import SelectDateWidget
 from django.contrib.auth.models import User
 
-from .models import UserDetail, Shakha
+from .models import UserDetail, Shakha, NoticeBoard
 
 cur_year = datetime.date.today().year
 
@@ -40,3 +40,11 @@ class EditResponsibility(forms.ModelForm):
     class Meta:
         model = UserDetail
         fields = ['responsibility']
+
+
+class AddNotification(forms.ModelForm):
+    class Meta:
+        model = NoticeBoard
+        fields = '__all__'
+        widgets = {'from_date': forms.SplitDateTimeWidget(),
+                'to_date': forms.SplitDateTimeWidget(),}

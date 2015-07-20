@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^shakha/(?P<shakha_id>\d+)/$', views.shakha_view, name="shakha"),
     url(r'^contacts/$', views.contacts_view, name="contacts"),
     url(r'^editresponsibility/(?P<user_id>\d+)/$', views.edit_responsibility_view, name="edit_responsibility"),
+    url(r'^addnotification/$', views.add_notification_view, name="add_notification"),
 ]

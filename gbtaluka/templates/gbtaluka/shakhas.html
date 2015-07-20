@@ -39,7 +39,7 @@
 					{% if user.is_authenticated %}
 						<th><a href="{% url 'gbtaluka:shakha' shakha.pk %}">{{ shakha.shakha_name }}</a>
 							{% if user.userdetail.responsibility.level <= 4 %}
-								<a href="{% url 'gbtaluka:edit_shakha' shakha.pk %}"> <span class="glyphicon glyphicon-edit"></span>Edit</a>
+								<a class="text-warning" href="{% url 'gbtaluka:edit_shakha' shakha.pk %}"> <span class="glyphicon glyphicon-edit"></span>Edit</a>
 							{% endif %}
 						</th>
 					{% else %}

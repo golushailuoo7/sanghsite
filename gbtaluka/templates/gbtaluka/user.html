@@ -19,14 +19,14 @@
 <div class="container">
 	<div class="row">
 <div class="col-xs-6 col-md-3">
-	{% if detail.picture %}
+	{% if this_user_detail.picture %}
   <a href="{{ this_user_detail.picture.url }}" class="thumbnail">
     <img src="{{ this_user_detail.picture.url }}" alt="profile_pic">
   </a>
   {% endif %}
   <h3>{{ this_user_detail.user.first_name }} {{ this_user_detail.user.last_name }}</h3>
-  <h4>Shakha: <small>{{ detail.shakha }}</small></h3>
-  <h4>Responsibility: <small>{{ detail.responsibility }}</small></h4>
+  <h4>Shakha: <small>{{ this_user_detail.shakha }}</small></h3>
+  <h4>Responsibility: <small>{{ this_user_detail.responsibility }}</small></h4>
 </div>
 <div class="col-xs-10 col-md-5">
 	<p><strong>Email: </strong>{{ this_user_detail.user.email }}</p>

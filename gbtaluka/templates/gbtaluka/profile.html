@@ -30,6 +30,7 @@
 
 	{% if detail.responsibility.level <= 4 %}
 		<h4><a href="{% url 'gbtaluka:add_shakha' %}">Add Shakha</a></h4>
+		<h4><a href="{% url 'gbtaluka:add_notification' %}">Add Notification</a></h4>
 	{% endif %}
 
 </div>
@@ -55,10 +56,10 @@
   	</div>
 	</form>
 	{% if users %}
-	{% for user in users %}
-		<a href="{% url 'gbtaluka:user' user.username %}">{{ user.first_name }} {{ user.last_name }}({{ user.userdetail.shakha }})</a>
+	{% for found_user in users %}
+		<a href="{% url 'gbtaluka:user' found_user.username %}">{{ found_user.first_name }} {{ found_user.last_name }}({{ found_user.userdetail.shakha }})</a>
 		{% if user.userdetail.responsibility.level <= 4 %}
-			<a href="{% url 'gbtaluka:edit_responsibility' user.pk %}"> <span class="glyphicon glyphicon-edit"></span>EditResponsibility</a>
+			<a class="text-warning" href="{% url 'gbtaluka:edit_responsibility' found_user.pk %}"> <span class="glyphicon glyphicon-edit"></span>EditResponsibility</a>
 		{% endif %}
 	{% endfor %}
 	{% endif %}
