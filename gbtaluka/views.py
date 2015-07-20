@@ -1,3 +1,5 @@
+from PIL import Image
+
 from django.shortcuts import render, redirect, get_object_or_404
 from django.utils import timezone
 from django.contrib.auth.decorators import login_required
@@ -45,6 +47,10 @@ def update_profile_view(request):
             user_entry.responsibility = Responsibility.objects.get(
                 level=8)
             user_entry.save()
+            if request.FILES:
+                im = Image.open(user_entry.picture.path)
+                im.thumbnail((512, 512))
+                im.save(user_entry.picture.path, "JPEG")
             return redirect('gbtaluka:profile')
     else:
         form = UpdateProfile(instance=request.user.userdetail)
