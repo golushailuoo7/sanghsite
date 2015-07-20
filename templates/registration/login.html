@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 
 {% block navbarright %}
-  <li><a href="{% url 'signup' %}">Signup</a></li>
+  <li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
 {% endblock %}
 
 
 {% block content %}
 
+<div class="container">
+  <div class="row">
 {% if form.errors %}
   <p>Your username and password didn't match. Please try again.</p>
 {% endif %}
@@ -20,7 +22,7 @@
   {% endif %}
 {% endif %}
 
-<form id="loginform" class="form-horizontal" method="post" action="{% url 'login' %}">
+<form class="form-horizontal" method="post" action="{% url 'login' %}">
     {% csrf_token %}
 
   <div class="form-group">
@@ -43,7 +45,7 @@
   
   <div class="form-group">
     <div class="col-sm-offset-1 col-sm-10">
-      <button type="submit" class="btn btn-default">Sign in</button>
+      <button type="submit" class="btn btn-primary">Sign in</button>
     </div>
   </div>
   <input type="hidden" name="next" value="{{ next }}" />
@@ -52,9 +54,10 @@
 
 <div class="form-group">
   <div class="col-sm-offset-1 col-sm-10">
-    <p><a href="{% url 'password_reset' %}">Lost password?</a></p>
+    <p><a class="text-danger" href="{% url 'password_reset' %}">Lost password?</a></p>
   </div>
 </div>
 
-
+</div>
+</div>
 {% endblock %}
