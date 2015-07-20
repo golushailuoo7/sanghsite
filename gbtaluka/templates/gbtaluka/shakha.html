@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block navbarright %}
+	
+		<li><a href="{% url 'gbtaluka:profile' %}"><span class="glyphicon glyphicon glyphicon-user"></span> {{ user.first_name }}</a></li>
+		<li><a href="{% url 'password_change' %}">change password</a></li>
+		<li><a href="{% url 'gbtaluka:update_profile' %}">update profile</a></li>
+		<li>
+		<form class="navbar-form navbar-right" action="{% url 'logout' %}" method="get">
+			<input type="hidden" name="next" value="{% url 'main_index' %}">
+			<input type="submit" class="btn btn-warning" value="logout">
+		</form>
+		</li>
+	
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="jumbotron" align="center">
+   <h1 class="text-info">{{ shakha.shakha_name }} {{ shakha.shakha_type }} Shakha</h1>
+   <h3><small>Timing: {{ shakha.shakha_time }}</small></h3> 
+   <h3><small>Venue: {{ shakha.shakha_venue }}</small></h3>
+</div>
+
+<div class="container">
+	<div class="row">
+		<h1 class="text-primary">Shakha Swayamsevaks:</h1>
+		{% for user_detail in shakha_users %}
+			<a class="text-info" href="{% url 'gbtaluka:user' user_detail.user.username %}">{{ user_detail.user.first_name }} {{ user_detail.user.last_name }}</a>
+		{% endfor %}
+	</div>
+</div>
+
+
+
+{% endblock %}

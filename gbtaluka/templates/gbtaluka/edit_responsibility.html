@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+
+{% block navbarright %}
+	<li><a href="{% url 'gbtaluka:profile' %}"><span class="glyphicon glyphicon glyphicon-user"></span> {{ user.first_name }}</a></li>
+	<li><a href="{% url 'password_change' %}">change password</a></li>
+	<li><a href="{% url 'gbtaluka:update_profile' %}">update profile</a></li>
+	<li>
+	<form class="navbar-form navbar-right" action="{% url 'logout' %}" method="get">
+		<input type="hidden" name="next" value="{% url 'main_index' %}">
+		<input type="submit" class="btn btn-warning" value="logout">
+	</form>
+	</li>
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<h3 class="text-info">Swayamsevak: <small>{{ user_detail.user.first_name }} {{ user_detail.user.last_name }}</small></h3>
+	{{ form.non_field_errors }}
+	<form class="form-horizontal" action="{% url 'gbtaluka:edit_responsibility' user_detail.user.pk %}" method="post">
+	{% csrf_token %}
+		{% for field in form %}
+		<div class="form-group">
+	    <div class="col-sm-2">
+	      {{ field.label_tag }}
+	    </div>
+	    <div class="col-sm-2">
+	      {{ field }}
+	    </div>
+	    <div class="col-sm-8">
+	      <p class="text-danger">{{ field.errors }}</p>
+	    </div>
+	  </div>
+	  {% endfor %}
+  	<div class="form-group">
+	    <div class="col-sm-offset-2 col-sm-10">
+	      <button type="submit" class="btn btn-primary">Edit Responsibility</button>
+	    </div>
+  	</div>
+	</form>
+
+	</div>
+	</div>
+	
+{% endblock %}

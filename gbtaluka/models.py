@@ -35,12 +35,12 @@ def content_file_name(instance, filename):
 
 
 class Shakha(models.Model):
-    MORNING = 'MG'
-    EVENING = 'EV'
-    NIGHT = 'NT'
-    WEEKLY_MORNING = 'WM'
-    WEEKLY_EVENING = 'WE'
-    WEEKLY_NIGHT = 'WN'
+    MORNING = 'MORNING'
+    EVENING = 'EVENING'
+    NIGHT = 'NIGHT'
+    WEEKLY_MORNING = 'WEEKLY_MORNING'
+    WEEKLY_EVENING = 'WEEKLY_EVENING'
+    WEEKLY_NIGHT = 'WEEKLY_NIGHT'
 
     TYPES = (
         (MORNING, 'Morning'),
@@ -53,7 +53,7 @@ class Shakha(models.Model):
 
     shakha_name = models.CharField(max_length=200)
     shakha_time = models.TimeField('shakha time')
-    shakha_type = models.CharField(max_length=2, choices=TYPES)
+    shakha_type = models.CharField(max_length=20, choices=TYPES)
     shakha_venue = models.CharField(max_length=400)
 
     def __str__(self):

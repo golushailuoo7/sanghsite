@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import SignupForm
-from gbtaluka.models import UserDetail, NoticeBoard
+from gbtaluka.models import UserDetail, NoticeBoard, Responsibility
 from django.contrib.auth.models import User
 from django.utils import timezone
 
@@ -23,6 +23,8 @@ def signup_view(request):
                 email=form.cleaned_data['email'])
                 user.set_password(form.cleaned_data['password'])
                 user_detail = UserDetail(user=user)
+                user_detail.responsibility = Responsibility.objects.get(
+                level=8)
                 user_detail.save()
                 return redirect('login')
     else:

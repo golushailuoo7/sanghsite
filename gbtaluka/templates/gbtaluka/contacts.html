@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block navbarright %}
+	{% if user.is_authenticated %}
+		<li><a href="{% url 'gbtaluka:profile' %}"><span class="glyphicon glyphicon glyphicon-user"></span> {{ user.first_name }}</a></li>
+		<li><a href="{% url 'password_change' %}">change password</a></li>
+		<li><a href="{% url 'gbtaluka:update_profile' %}">update profile</a></li>
+		<li>
+		<form class="navbar-form navbar-right" action="{% url 'logout' %}" method="get">
+			<input type="hidden" name="next" value="{% url 'main_index' %}">
+			<input type="submit" class="btn btn-warning" value="logout">
+		</form>
+		</li>
+	{% else %}
+		<li><a href="{% url 'login' %}"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		<li><a href="{% url 'signup' %}"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
+	{% endif %}
+
+{% endblock %}
+
+
+
+{% block content %}
+
+<div class="container">
+	<div class="row">
+		<table class="table table-striped">
+			<thead>
+				<tr class="danger">
+					<th><h3>Name</h3></th>
+					<th><h3>Responsibility</h3></th>
+					<th><h3>Contact No.</h3></th>
+					<th><h3>Email Address</h3></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class="info">
+					{% for contact_user in contact_users %}
+					<th>{{ contact_user.user.first_name|capfirst }} {{ contact_user.user.last_name|capfirst }}</th>
+					<th>{{ contact_user.responsibility.responsibility }}</th>
+					<th>{{ contact_user.contact_number }}</th>
+					<th>{{ contact_user.user.email }}</th>
+					{% endfor %}
+				</tr>
+			</tbody>
+		</table>	
+	</div>
+</div>
+
+{% endblock %}

@@ -27,7 +27,13 @@
   <h3>{{ detail.user.first_name }} {{ detail.user.last_name }}</h3>
   <h4>Shakha: <small>{{ detail.shakha }}</small></h3>
   <h4>Responsibility: <small>{{ detail.responsibility }}</small></h4>
+
+	{% if detail.responsibility.level <= 4 %}
+		<h4><a href="{% url 'gbtaluka:add_shakha' %}">Add Shakha</a></h4>
+	{% endif %}
+
 </div>
+
 <div class="col-xs-10 col-md-5">
 	<form class="form-horizontal" action="{% url 'gbtaluka:profile' %}" method="post">
 	{% csrf_token %}
@@ -48,9 +54,14 @@
 	    </div>
   	</div>
 	</form>
+	{% if users %}
 	{% for user in users %}
 		<a href="{% url 'gbtaluka:user' user.username %}">{{ user.first_name }} {{ user.last_name }}({{ user.userdetail.shakha }})</a>
+		{% if user.userdetail.responsibility.level <= 4 %}
+			<a href="{% url 'gbtaluka:edit_responsibility' user.pk %}"> <span class="glyphicon glyphicon-edit"></span>EditResponsibility</a>
+		{% endif %}
 	{% endfor %}
+	{% endif %}
 </div>
 <div class="col-xs-10 col-md-4 Notification_bar noticebar">
 	<h2>Notifications and Events</h2>
